@@ -43,8 +43,8 @@ const char *String_cstring(struct String *self) {
 }
 
 bool create_concatenated_string(struct String *result, struct String *lhs, struct String *rhs) {
-    char *concatenated_text = malloc(lhs->length + rhs->length + 1);
-    if (!concatenated_text) {
+    result->value = malloc(lhs->length + rhs->length + 1);
+    if (!result->value) {
         return NULL;
     }
     memcpy(result->value, lhs->value, lhs->length);
@@ -53,7 +53,7 @@ bool create_concatenated_string(struct String *result, struct String *lhs, struc
     return true;
 }
 
-const struct String * String_concatenate(struct String *lhs, struct String *rhs) {
+struct String * String_concatenate(struct String *lhs, struct String *rhs) {
     struct String *result = malloc(sizeof(struct String));
     if (result) {
         if (!create_concatenated_string(result, lhs, rhs)) {
