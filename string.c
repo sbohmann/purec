@@ -11,11 +11,11 @@ struct String {
     char *text;
 };
 
-void assign_text(struct String *self, const char *text, size_t size) {
+static void assign_text(struct String *self, const char *text, size_t size) {
     memcpy(self->text, text, size);
 }
 
-bool allocate_and_assign_text(struct String *self, const char *text) {
+static bool allocate_and_assign_text(struct String *self, const char *text) {
     size_t size = strlen(text) + 1;
     self->text = malloc(size);
     if (self->text) {
