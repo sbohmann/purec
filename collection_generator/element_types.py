@@ -16,6 +16,7 @@ class ElementType:
     def size(self):
         return self._size
 
+
 int8 = ElementType('int8', 'int8_t', 1)
 uint8 = ElementType('uint8', 'uint8_t', 1)
 int16 = ElementType('int16', 'int16_t', 2)
