@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include "string.h"
 
 int main() {
-    printf("Hello, World!\n");
-    return 0;
+    struct String *text = String_create("Hi! :D");
+    puts(String_cstring(text));
+    release(text);
+    release(text);
 }

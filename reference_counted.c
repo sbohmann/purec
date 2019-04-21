@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void retain(struct ReferenceCounted *instance) {
+void ReferenceCounted_retain(struct ReferenceCounted *instance) {
     size_t previous_value = instance->reference_count;
     size_t new_value = ++instance->reference_count;
     if (new_value < previous_value) {
@@ -12,7 +12,7 @@ void retain(struct ReferenceCounted *instance) {
     }
 }
 
-void release(struct ReferenceCounted *instance) {
+void ReferenceCounted_release(struct ReferenceCounted *instance) {
     size_t previous_value = instance->reference_count;
     size_t new_value = --instance->reference_count;
     if (new_value > previous_value) {
