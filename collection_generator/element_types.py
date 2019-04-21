@@ -8,11 +8,11 @@ class ElementType:
     def name(self):
         return self._name
 
-    @@property
+    @property
     def typename(self):
         return self._typename
 
-    @@property
+    @property
     def size(self):
         return self._size
 
