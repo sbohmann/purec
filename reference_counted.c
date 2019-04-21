@@ -27,5 +27,6 @@ void ReferenceCounted_release(struct ReferenceCounted *instance) {
         if (instance->cleanup) {
             instance->cleanup(instance);
         }
+        free(instance);
     }
 }
