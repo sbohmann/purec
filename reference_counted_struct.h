@@ -1,3 +1,5 @@
+#pragma once
+
 #include "reference_counted.h"
 
 #include <stdatomic.h>
