@@ -7,17 +7,18 @@
 
 struct String {
     struct ReferenceCounted base;
-    const size_t length;
+    size_t length;
     char *value;
 };
 
 static void assign_text(struct String *self, const char *text, size_t size) {
-    memcpy(self->value, text, size);
+    memcpy(self->value, text, size + 1);
+    self->length = size;
 }
 
 static bool allocate_and_assign_text(struct String *self, const char *text) {
-    size_t size = strlen(text) + 1;
-    self->value = malloc(size);
+    size_t size = strlen(text);
+    self->value = malloc(size + 1);
     if (self->value) {
         assign_text(self, text, size);
     }
@@ -39,4 +40,26 @@ struct String * String_create(const char *text) {
 
 const char *String_cstring(struct String *self) {
     return self->value;
+}
+
+bool create_concatenated_string(struct String *result, struct String *lhs, struct String *rhs) {
+    char *concatenated_text = malloc(lhs->length + rhs->length + 1);
+    if (!concatenated_text) {
+        return NULL;
+    }
+    memcpy(result->value, lhs->value, lhs->length);
+    memcpy(result->value + lhs->length, rhs->value, rhs->length);
+    result->value[lhs->length + rhs->length] = 0;
+    return true;
+}
+
+const struct String * String_concatenate(struct String *lhs, struct String *rhs) {
+    struct String *result = malloc(sizeof(struct String));
+    if (result) {
+        if (!create_concatenated_string(result, lhs, rhs)) {
+            free(result);
+            return NULL;
+        }
+    }
+    return result;
 }
