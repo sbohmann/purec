@@ -28,6 +28,7 @@ struct String * String_create(const char *text) {
     struct String * self = malloc(sizeof(struct String));
     if (self) {
         bzero(self, sizeof(struct String));
+        ReferenceCounted_init(&self->base);
         if (!allocate_and_assign_text(self, text)) {
             free(self);
             return NULL;

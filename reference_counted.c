@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void ReferenceCounted_init(struct ReferenceCounted *self) {
+    self->reference_count = 1;
+}
+
 void ReferenceCounted_retain(struct ReferenceCounted *instance) {
     size_t previous_value = instance->reference_count;
     size_t new_value = ++instance->reference_count;
